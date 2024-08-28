@@ -31,5 +31,5 @@ class TestUsers(BaseTest):
     @allure.title('Изменение пользователя')
     def test_update_user(self):
         data = self.api_users.get_all_users()
-        user_uuid = self.api_users.get_uuid_by_name(data, name="Alex")
+        user_uuid = self.api_users.get_uuid_by_name(data, name="John")
         self.api_users.update_user(user_uuid)
