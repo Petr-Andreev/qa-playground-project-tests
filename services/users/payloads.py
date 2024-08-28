@@ -13,3 +13,11 @@ class Payloads:
 
     }
 
+    update_user = {
+
+        "email": faker.email(),
+        "password": faker.password(length=10),
+        "name": faker.first_name(),
+        "nickname": faker.user_name()
+
+    }

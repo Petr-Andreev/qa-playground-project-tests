@@ -6,5 +6,6 @@ load_dotenv()
 
 class Headers:
     basic = {
-        "Authorization": f"Bearer {os.getenv('API_TOKEN')}"
+        "Authorization": f"Bearer {os.getenv('API_TOKEN')}",
+        "X-Task-Id": "API-3"
     }
