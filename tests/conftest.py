@@ -1,11 +1,7 @@
 import os
-from dotenv import load_dotenv
 import pytest
 import requests
-
-load_dotenv()
-HOST = 'https://dev-gs.qa-playground.com/api/v1' if os.environ['STAGE'] == 'qa'\
-    else 'https://release-gs.qa-playground.com/api/v1'
+from config.env import HOST
 
 
 @pytest.fixture(autouse=True, scope='session')

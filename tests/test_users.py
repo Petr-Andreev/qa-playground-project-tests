@@ -33,4 +33,4 @@ class TestUsers(BaseTest):
         data = self.api_users.get_all_users()
         user_uuid = self.api_users.get_uuid_by_name(data, name="John")
         self.api_users.update_user(user_uuid)
-
+        self.api_users.get_user_by_id(user_uuid)

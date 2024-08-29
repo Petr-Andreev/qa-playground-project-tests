@@ -1,11 +1,11 @@
 import allure
 import requests
-
-from utils.helper import Helper
+from utils.helper import Helper, helper
 from services.users.payloads import Payloads
 from services.users.endpoints import Endpoints
 from config.headers import Headers
-from services.users.models.user_model import UserModel, UserModelDelete, UserResponse
+from services.users.models.user_model import UserModel, UserResponse
+from utils.attach import response_logging, response_attaching
 
 
 class UsersAPI(Helper):
@@ -23,6 +23,7 @@ class UsersAPI(Helper):
             json=self.payloads.create_user
 
         )
+        helper.api_request(response)
         assert response.status_code == 200, response.json()
         self.attach_response(response.json())
         model = UserModel(**response.json())
@@ -30,20 +31,22 @@ class UsersAPI(Helper):
 
     @allure.step("Получение всех пользователей")
     def get_all_users(self, offset=0, limit=10):
-        response = requests.get(
-            params={
-                'offset': offset,
-                'limit': limit
-            },
-            url=self.endpoints.get_user_list,
-            headers=self.headers.basic
-        )
-        assert response.status_code == 200, response.json()
-        self.attach_response(response.json())
-        UserResponse(**response.json())
-        json_data = response.json()
-        value = json_data.get("users")
-        return value
+        with allure.step(f'Отправление запроса с параметрами offset: {offset}, limit: {limit}'):
+            response = requests.get(
+                params={
+                    'offset': offset,
+                    'limit': limit
+                },
+                url=self.endpoints.get_user_list,
+                headers=self.headers.basic
+            )
+            helper.api_request(response)
+            assert response.status_code == 200, response.json()
+            self.attach_response(response.json())
+            UserResponse(**response.json())
+            json_data = response.json()
+            value = json_data.get("users")
+            return value
 
     @allure.step("Получение пользователя по uuid")
     def get_user_by_id(self, uuid):
@@ -53,6 +56,7 @@ class UsersAPI(Helper):
                 headers=self.headers.basic,
 
             )
+            helper.api_request(response)
             assert response.status_code == 200, response.json()
             self.attach_response(response.json())
             model = UserModel(**response.json())
@@ -74,6 +78,7 @@ class UsersAPI(Helper):
             headers=self.headers.basic,
 
         )
+        helper.api_request(response)
         assert response.status_code == 204, response.json()
 
     @allure.step("Изменение пользователя")
@@ -84,6 +89,7 @@ class UsersAPI(Helper):
             json=self.payloads.update_user
 
         )
+        helper.api_request(response)
         assert response.status_code == 200, response.json()
         self.attach_response(response.json())
         model = UserModel(**response.json())
