@@ -5,7 +5,6 @@ from services.users.payloads import Payloads
 from services.users.endpoints import Endpoints
 from config.headers import Headers
 from services.users.models.user_model import UserModel, UserResponse
-from utils.attach import response_logging, response_attaching
 
 
 class UsersAPI(Helper):
