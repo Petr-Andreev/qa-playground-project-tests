@@ -21,7 +21,7 @@ class TestGames(BaseTest):
 
     @pytest.mark.regression
     @allure.story("Получение игры по uuid")
-    @allure.title('Успешное получение игры по названию uuid')
+    @allure.title('Успешное получение игры по значению uuid')
     def test_get_game_by_uuid(self):
         uuid = self.api_games.get_uuid_game_by_title(offset=0, limit=10, query="Baldur's Gate 3")
         self.api_games.get_game_by_uuid(uuid)

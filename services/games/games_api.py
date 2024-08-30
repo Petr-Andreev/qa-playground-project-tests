@@ -3,7 +3,7 @@ import requests
 from utils.helper import Helper, helper
 from services.games.endpoints import Endpoints
 from config.headers import Headers
-from services.games.models.games_model import MainModel
+from services.games.models.games_model import MainModel, GameModel
 
 
 class GamesAPI(Helper):
@@ -75,21 +75,25 @@ class GamesAPI(Helper):
                 params=params
             )
             helper.api_request(response)
-            assert response.json()['games'][0]['title'] == query
             self.attach_response(response.json())
+            MainModel(**response.json())
+            assert response.json()['games'][0]['title'] == query
             uuid = response.json()['games'][0]['uuid']
             return uuid
 
     @allure.step("Получение игры по uuid")
     def get_game_by_uuid(self, uuid):
-        params = {}
-        if uuid:
-            params['uuid'] = uuid
-        response = requests.get(
-            url=self.endpoints.get_games_for_uuid(uuid),
-            headers=self.headers.basic,
-            params=params
-        )
-        helper.api_request(response)
-        assert response.status_code == 200, response.json()
-        assert response.json()['uuid'] == uuid
+        with allure.step(f'Получение игры по параметру uuid: {uuid}'):
+            params = {}
+            if uuid:
+                params['uuid'] = uuid
+            response = requests.get(
+                url=self.endpoints.get_games_for_uuid(uuid),
+                headers=self.headers.basic,
+                params=params
+            )
+            helper.api_request(response)
+            self.attach_response(response.json())
+            GameModel(**response.json())
+            assert response.status_code == 200, response.json()
+            assert response.json()['uuid'] == uuid
