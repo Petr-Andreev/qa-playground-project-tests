@@ -3,7 +3,7 @@ import pytest
 from config.base_test import BaseTest
 
 
-@allure.epic("Администрирование")
+@allure.epic("Администрирование над пользователями")
 @allure.feature("Пользователь")
 class TestUsers(BaseTest):
 
