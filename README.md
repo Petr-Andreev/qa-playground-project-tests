@@ -16,3 +16,59 @@
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/pycharm/pycharm-original.svg" title="pycharm" alt="pycharm" width="40" height="40"/>&nbsp
   <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" title="telegram" alt="telegram" width="40" height="40"/>&nbsp     
 </div>
+
+## Список автоматизированных тест-кейсов:
+1. Проверка успешного получения пользователей по заданному лимиту
+2. Проверка успешного создания нового пользователя
+3. Проверка успешного удаления пользователя
+4. Проверка успешного изменения пользователя по заданным параметрам
+5. Проверка успешного получения игр по заданному лимиту
+6. Проверка успешного получения игры по названию
+7. Успешное успешного получения игры по значению uuid
+
+## Запуск тестов и получение отчета
+
+### **Локально**
+
+<details><summary>1. Склонировать репозиторий</summary>
+
+```
+git clone https://github.com/Petr-Andreev/qa-playground-project-tests.git
+```
+</details>
+
+<details><summary>2. Создать и активировать виртуальное окружение, установить зависимости и запустить тесты</summary>
+
+```
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pytest -sv
+```
+</details>
+
+<details><summary>3. Получить отчет о прохождении тестов в allure</summary>
+
+```
+allure serve allure-results
+```
+</details>
+
+<details><summary>4. После выполнения команды откроется браузер с отчетом</summary>
+    
+<img src="resources/allure_local.png">
+
+</details>
+
+## <img src="https://camo.githubusercontent.com/e8c35be9136635c1b2e2b22b112e02ef1fb9e9434970df18d84071a2e714d3e0/68747470733a2f2f616c6c7572657265706f72742e6f72672f7075626c69632f696d672f616c6c7572652d7265706f72742e737667" title="allure" alt="allure" width="30" height="30"/></a>
+
+<details><summary>Основной отчет</summary>
+
+<img src="resources/allure_base_report.png">
+
+</details>
+<details><summary>Тесты</summary>
+
+<img src="resources/allure_tests.png">
+
+</details>
